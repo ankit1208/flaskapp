@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SQL Generator</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background-color: #f5f5f5; }
+        textarea, input[type="text"] { width: 100%; padding: 10px; margin-top: 10px; }
+        .output { margin-top: 20px; background: #fff; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Natural Language to SQL Generator</h2>
+    <form method="post">
+        <label for="prompt">Enter your question:</label><br>
+        <input type="text" name="prompt" placeholder="e.g. Show me all transactions made in INR">
+        <button type="submit">Generate SQL</button>
+    </form>
+
+    {% if sql_output %}
+    <div class="output">
+        <h3>Generated SQL:</h3>
+        <pre>{{ sql_output }}</pre>
+    </div>
+    {% endif %}
+</body>
+</html>
