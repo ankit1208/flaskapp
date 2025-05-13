@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SQL Generator</title>
-    <style>
-        body { font-family: Arial; padding: 20px; background-color: #f5f5f5; }
-        textarea, input[type="text"] { width: 100%; padding: 10px; margin-top: 10px; }
-        .output { margin-top: 20px; background: #fff; padding: 15px; border-radius: 5px; }
-    </style>
+    <title>Natural Language to SQL</title>
+    <script>
+        function showLoading() {
+            const loadingDiv = document.getElementById("loading");
+            const button = document.getElementById("submitBtn");
+            loadingDiv.style.display = "block";
+            button.disabled = true;
+            button.innerText = "Loading...";
+        }
+    </script>
 </head>
 <body>
-    <h2>Natural Language to SQL Generator</h2>
-    <form method="post">
-        <label for="prompt">Enter your question:</label><br>
-        <input type="text" name="prompt" placeholder="e.g. Show me all transactions made in INR">
-        <button type="submit">Generate SQL</button>
+    <h1>Ask Your Query</h1>
+    <form method="post" onsubmit="showLoading()">
+        <label for="prompt">Prompt:</label>
+        <input type="text" id="prompt" name="prompt" value="{{ request.form.prompt or '' }}" size="80" required>
+        <button type="submit" id="submitBtn">Generate SQL</button>
     </form>
 
-    {% if sql_output %}
-    <div class="output">
-        <h3>Generated SQL:</h3>
-        <pre>{{ sql_output }}</pre>
+    <div id="loading" style="display: none; color: blue; margin-top: 10px;">
+        Generating SQL, please wait...
     </div>
+
+    {% if sql_output %}
+        <h2>Generated SQL:</h2>
+        <pre>{{ sql_output }}</pre>
     {% endif %}
 </body>
 </html>

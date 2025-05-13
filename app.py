@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 import requests
+import json
+import os
 
 app = Flask(__name__)
 
-# Schema + Examples for better responses
+# Schema for context
 SCHEMA = """
 Table: digx_ap_trans
 Columns:
@@ -18,23 +20,24 @@ Columns:
 - CREATION_DATE
 """
 
-EXAMPLES = """
-Example 1:
-Prompt: List all transactions made in GBP currency.
-Output: SELECT * FROM digx_ap_trans WHERE CURRENCY = 'GBP';
+def load_examples_from_json(filepath="examples.json"):
+    if not os.path.exists(filepath):
+        return ""
+    
+    with open(filepath, "r") as f:
+        data = json.load(f)
 
-Example 2:
-Prompt: Show all transaction IDs created by John Doe.
-Output: SELECT TXN_ID FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';
-
-Example 3:
-Prompt: What is the name of the transaction with ID E8IXC8UKIPLU?
-Output: SELECT NAME FROM digx_ap_trans WHERE TXN_ID = 'E8IXC8UKIPLU';
-"""
+    examples = data.get("examples", [])
+    formatted = "\n".join([
+        f"Example {i+1}:\nPrompt: {ex['prompt']}\nOutput: {ex['output']};"
+        for i, ex in enumerate(examples)
+    ])
+    return formatted
 
 def generate_sql_ollama(user_prompt):
+    examples = load_examples_from_json()
     full_prompt = f"""{SCHEMA}
-{EXAMPLES}
+{examples}
 
 Now, based on the above examples:
 Prompt: {user_prompt}
@@ -48,7 +51,8 @@ Output:"""
             "stream": False
         }
     )
-    return response.json()["response"].strip()
+
+    return response.json().get("response", "No response").strip()
 
 @app.route("/", methods=["GET", "POST"])
 def index():

@@ -1,0 +1,67 @@
+{
+    "examples": [
+        {
+          "prompt": "List all transactions made in GBP currency.",
+          "output": "SELECT * FROM digx_ap_trans WHERE CURRENCY = 'GBP';"
+        },
+        {
+          "prompt": "Show all transaction IDs created by John Doe.",
+          "output": "SELECT TXN_ID FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';"
+        },
+        {
+          "prompt": "What is the name of the transaction with ID E8IXC8UKIPLU?",
+          "output": "SELECT NAME FROM digx_ap_trans WHERE TXN_ID = 'E8IXC8UKIPLU';"
+        },
+        {
+          "prompt": "Get all transactions created after April 1st, 2024.",
+          "output": "SELECT * FROM digx_ap_trans WHERE CREATION_DATE > TO_DATE('01-04-24', 'DD-MM-RR');"
+        },
+        {
+          "prompt": "Find all savings account transactions.",
+          "output": "SELECT * FROM digx_ap_trans WHERE ACCOUNT_TYPE = 'SAV';"
+        },
+        {
+          "prompt": "Which transactions were made by party 200101?",
+          "output": "SELECT * FROM digx_ap_trans WHERE PARTY_ID = '200101';"
+        },
+        {
+          "prompt": "Show me all accounts that used GBP currency.",
+          "output": "SELECT DISTINCT ACCOUNT_ID FROM digx_ap_trans WHERE CURRENCY = 'GBP';"
+        },
+        {
+          "prompt": "What is the total amount transacted by John Doe?",
+          "output": "SELECT SUM(AMOUNT) FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';"
+        },
+        {
+          "prompt": "How many transactions has John Doe made?",
+          "output": "SELECT COUNT(*) FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';"
+        },
+        {
+          "prompt": "List all unique account types used in the table.",
+          "output": "SELECT DISTINCT ACCOUNT_TYPE FROM digx_ap_trans;"
+        },
+        {"prompt": "Find all savings account transactions.", "output": "SELECT * FROM digx_ap_trans WHERE ACCOUNT_TYPE = 'SAV';"},
+    {"prompt": "Which transactions were made by party 200101?", "output": "SELECT * FROM digx_ap_trans WHERE PARTY_ID = '200101';"},
+    {"prompt": "Show me all accounts that used GBP currency.", "output": "SELECT DISTINCT ACCOUNT_ID FROM digx_ap_trans WHERE CURRENCY = 'GBP';"},
+    {"prompt": "What is the total amount transacted by John Doe?", "output": "SELECT SUM(AMOUNT) FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';"},
+    {"prompt": "How many transactions has John Doe made?", "output": "SELECT COUNT(*) FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';"},
+    {"prompt": "List all unique account types used in the table.", "output": "SELECT DISTINCT ACCOUNT_TYPE FROM digx_ap_trans;"},
+    {"prompt": "Get all transactions done in INR currency.", "output": "SELECT * FROM digx_ap_trans WHERE CURRENCY = 'INR';"},
+    {"prompt": "Fetch all transactions made after 1st May 2024.", "output": "SELECT * FROM digx_ap_trans WHERE CREATION_DATE > TO_DATE('01-05-24', 'DD-MM-RR');"},
+    {"prompt": "Retrieve all records where amount is more than 5000.", "output": "SELECT * FROM digx_ap_trans WHERE AMOUNT > 5000;"},
+    {"prompt": "What is the maximum transaction amount in the table?", "output": "SELECT MAX(AMOUNT) FROM digx_ap_trans;"},
+    {"prompt": "Give me the details of transaction with ID E8IXC8UKIPLU.", "output": "SELECT * FROM digx_ap_trans WHERE TXN_ID = 'E8IXC8UKIPLU';"},
+    {"prompt": "How many transactions are in the table?", "output": "SELECT COUNT(*) FROM digx_ap_trans;"},
+    {"prompt": "Show the minimum amount transacted by Alice.", "output": "SELECT MIN(AMOUNT) FROM digx_ap_trans WHERE CREATED_BY = 'Alice';"},
+    {"prompt": "Find all current account transactions.", "output": "SELECT * FROM digx_ap_trans WHERE ACCOUNT_TYPE = 'CUR';"},
+    {"prompt": "Get all transactions made on 30th April 2024.", "output": "SELECT * FROM digx_ap_trans WHERE CREATION_DATE = TO_DATE('30-04-24', 'DD-MM-RR');"},
+    {"prompt": "List all distinct currencies used.", "output": "SELECT DISTINCT CURRENCY FROM digx_ap_trans;"},
+    {"prompt": "Which accounts have transactions by Emily?", "output": "SELECT DISTINCT ACCOUNT_ID FROM digx_ap_trans WHERE CREATED_BY = 'Emily';"},
+    {"prompt": "Get transaction names for John Doe.", "output": "SELECT DISTINCT NAME FROM digx_ap_trans WHERE CREATED_BY = 'John Doe';"},
+    {"prompt": "Find all transactions where currency is not USD.", "output": "SELECT * FROM digx_ap_trans WHERE CURRENCY != 'USD';"},
+    {"prompt": "How many unique parties are there?", "output": "SELECT COUNT(DISTINCT PARTY_ID) FROM digx_ap_trans;"},
+    {"prompt": "List the names of all transactions done in EUR.", "output": "SELECT DISTINCT NAME FROM digx_ap_trans WHERE CURRENCY = 'EUR';"},
+    {"prompt": "Give me all transactions created by Alice and amount above 1000.", "output": "SELECT * FROM digx_ap_trans WHERE CREATED_BY = 'Alice' AND AMOUNT > 1000;"}
+    ]
+  }
+  
